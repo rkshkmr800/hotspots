@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	"github.com/rkshkmr800/hotspots/server"
+	"github.com/rkshkmr800/hotspots/backend/main-framework/server"
 )
 
 func performRequest(r http.Handler, method, path string, body []byte) *httptest.ResponseRecorder {
