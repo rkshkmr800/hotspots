@@ -1,4 +1,4 @@
-module github.com/rkshkmr800/hotspots
+module github.com/rkshkmr800/hotspots/backend/main-framework
 
 go 1.13
 
