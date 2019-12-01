@@ -28,7 +28,7 @@ jobs:
       - run: go test ./...
       
 workflows:
-  cicd:
+  continuous_integration:
     jobs:
       - build_project
       - run_unit_tests:
