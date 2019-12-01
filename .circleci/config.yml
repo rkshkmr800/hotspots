@@ -1,10 +1,10 @@
-version: 2.1
+version: 2
 # orbs:
 #   gcp-gke: circleci/gcp-gke@0.1.0
 #   gcr: circleci/gcp-gcr@0.0.2
 
 jobs:
-  test:
+  build:
     description: Build and run the tests
     docker:
       # specify the version
