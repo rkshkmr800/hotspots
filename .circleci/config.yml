@@ -1,12 +1,13 @@
 # Golang CircleCI 2.0 configuration file
 #
 # Check https://circleci.com/docs/2.0/language-go/ for more details
-version: 2
+version: 2.1
 orbs:
   gcp-gke: circleci/gcp-gke@0.1.0
   gcr: circleci/gcp-gcr@0.0.2
+
 jobs:
-  Build_And_Test:
+  build_and_test:
     description: Build and run the tests
     docker:
       # specify the version
@@ -20,7 +21,7 @@ jobs:
       - run: go get -v -t -d ./...
       - run: go test ./...
   
-  Build_and_Push:
+  build_and_push:
     description: Build the docker images and push to docker registry
     machine: true
     steps:
@@ -28,12 +29,12 @@ jobs:
       - gcr/gcr-auth
 
 worlflows:
-  Continuous-Integration-And-Deployment:
+  continuous_integration_and_deployment:
     jobs:
-      - Build_And_Test
-      - Build_and_Push:
+      - build_and_test
+      - build_and_push:
           requires:
-            - Build_And_Test
+            - build_and_test
           filers:
             branches:
               only: master
