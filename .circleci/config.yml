@@ -4,7 +4,7 @@ orbs:
   gcr: circleci/gcp-gcr@0.0.2
 
 jobs:
-  build_and_test:
+  test:
     description: Build and run the tests
     docker:
       # specify the version
@@ -18,21 +18,20 @@ jobs:
       - run: go get -v -t -d ./...
       - run: go test ./...
   
-  build_and_push:
-    description: Build the docker images and push to docker registry
-    machine: true
-    steps:
-      - checkout
-      - gcr/gcr-auth
+  # build_and_push:
+  #   description: Build the docker images and push to docker registry
+  #   machine: true
+  #   steps:
+  #     - checkout
+  #     - gcr/gcr-auth
 
 worlflows:
   "Continuous Integration And Deployment":
     jobs:
-      - build_and_test
-      - build_and_push:
-          requires:
-            - build_and_test
-          filers:
-            branches:
-              only: master
-
+      - test
+      # - build_and_push:
+      #     requires:
+      #       - test
+      #     filers:
+      #       branches:
+      #         only: master
