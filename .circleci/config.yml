@@ -4,7 +4,7 @@ version: 2.1
 #   gcr: circleci/gcp-gcr@0.0.2
 
 jobs:
-  build:
+  build_project:
     docker:
       # specify the version
       - image: circleci/golang:1.13
@@ -16,7 +16,7 @@ jobs:
       # specify any bash command here prefixed with `run: `
       - run: go get -v -t -d ./...
       - run: go build ./...
-  test:
+  run_unit_tests:
     description: Build and run the tests
     docker:
       # specify the version
@@ -28,22 +28,14 @@ jobs:
 
       # specify any bash command here prefixed with `run: `
       - run: go test ./...
-  
-  # build_and_push:
-  #   description: Build the docker images and push to docker registry
-  #   machine: true
-  #   steps:
-  #     - checkout
-  #     - gcr/gcr-auth
-
-worlflows:
-  version: 2
-  "Continuous Integration And Deployment":
+      
+workflows:
+  cicd:
     jobs:
-      - build
-      - test:
+      - build_project
+      - run_unit_tests:
           requires:
-            - build
+            - build_project
       # - build_and_push:
       #     requires:
       #       - test
