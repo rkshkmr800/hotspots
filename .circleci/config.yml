@@ -6,7 +6,7 @@ orbs:
   gcp-gke: circleci/gcp-gke@0.1.0
   gcr: circleci/gcp-gcr@0.0.2
 jobs:
-  Build-And-Test:
+  Build_And_Test:
     description: Build and run the tests
     docker:
       # specify the version
@@ -20,7 +20,7 @@ jobs:
       - run: go get -v -t -d ./...
       - run: go test ./...
   
-  Build-and-Push:
+  Build_and_Push:
     description: Build the docker images and push to docker registry
     machine: true
     steps:
@@ -30,10 +30,10 @@ jobs:
 worlflows:
   Continuous-Integration-And-Deployment:
     jobs:
-      - Build-And-Test
-      - Build-and-Push:
+      - Build_And_Test
+      - Build_and_Push:
           requires:
-            - Build-And-Test
+            - Build_And_Test
           filers:
             branches:
               only: master
