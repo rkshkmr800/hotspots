@@ -15,7 +15,7 @@ jobs:
 
       # specify any bash command here prefixed with `run: `
       - run: go get -v -t -d ./...
-      - run: go build
+      - run: go build ./...
   test:
     description: Build and run the tests
     docker:
