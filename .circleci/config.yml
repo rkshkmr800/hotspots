@@ -1,7 +1,4 @@
-# Golang CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-go/ for more details
-version: 2.1
+version: 2
 orbs:
   gcp-gke: circleci/gcp-gke@0.1.0
   gcr: circleci/gcp-gcr@0.0.2
@@ -29,13 +26,13 @@ jobs:
       - gcr/gcr-auth
 
 worlflows:
-  continuous_integration_and_deployment:
+  "Continuous Integration And Deployment":
     jobs:
       - build_and_test
-      # - build_and_push:
-      #     requires:
-      #       - build_and_test
-      #     filers:
-      #       branches:
-      #         only: master
+      - build_and_push:
+          requires:
+            - build_and_test
+          filers:
+            branches:
+              only: master
 
