@@ -37,6 +37,7 @@ jobs:
   #     - gcr/gcr-auth
 
 worlflows:
+  version: 2
   "Continuous Integration And Deployment":
     jobs:
       - build
