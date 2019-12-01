@@ -25,13 +25,13 @@ jobs:
   #     - checkout
   #     - gcr/gcr-auth
 
-# worlflows:
-#   "Continuous Integration And Deployment":
-#     jobs:
-#       - test
-#       - build_and_push:
-#           requires:
-#             - test
-#           filers:
-#             branches:
-#               only: master
+worlflows:
+  "Continuous Integration And Deployment":
+    jobs:
+      - build
+      # - build_and_push:
+      #     requires:
+      #       - test
+      #     filers:
+      #       branches:
+      #         only: master
