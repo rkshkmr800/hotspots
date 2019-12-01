@@ -6,27 +6,25 @@ version: 2.1
 jobs:
   build_project:
     docker:
-      # specify the version
       - image: circleci/golang:1.13
 
     working_directory: /go/src/github.com/rkshkmr800/hotspots
     steps:
       - checkout
 
-      # specify any bash command here prefixed with `run: `
       - run: go get -v -t -d ./...
       - run: go build ./...
+
   run_unit_tests:
     description: Build and run the tests
     docker:
-      # specify the version
       - image: circleci/golang:1.13
 
     working_directory: /go/src/github.com/rkshkmr800/hotspots
     steps:
       - checkout
 
-      # specify any bash command here prefixed with `run: `
+      - run: go get -v -t -d ./...
       - run: go test ./...
       
 workflows:
