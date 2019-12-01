@@ -1,7 +1,7 @@
 version: 2.1
-orbs:
-  gcp-gke: circleci/gcp-gke@0.1.0
-  gcr: circleci/gcp-gcr@0.0.2
+# orbs:
+#   gcp-gke: circleci/gcp-gke@0.1.0
+#   gcr: circleci/gcp-gcr@0.0.2
 
 jobs:
   test:
@@ -25,13 +25,13 @@ jobs:
   #     - checkout
   #     - gcr/gcr-auth
 
-worlflows:
-  "Continuous Integration And Deployment":
-    jobs:
-      - test
-      # - build_and_push:
-      #     requires:
-      #       - test
-      #     filers:
-      #       branches:
-      #         only: master
+# worlflows:
+#   "Continuous Integration And Deployment":
+#     jobs:
+#       - test
+#       - build_and_push:
+#           requires:
+#             - test
+#           filers:
+#             branches:
+#               only: master
