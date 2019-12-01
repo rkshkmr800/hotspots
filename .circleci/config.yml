@@ -1,11 +1,10 @@
-version: 2
+version: 2.1
 # orbs:
 #   gcp-gke: circleci/gcp-gke@0.1.0
 #   gcr: circleci/gcp-gcr@0.0.2
 
 jobs:
   build:
-    description: Build and run the tests
     docker:
       # specify the version
       - image: circleci/golang:1.13
@@ -16,6 +15,18 @@ jobs:
 
       # specify any bash command here prefixed with `run: `
       - run: go get -v -t -d ./...
+      - run: go build
+  test:
+    description: Build and run the tests
+    docker:
+      # specify the version
+      - image: circleci/golang:1.13
+
+    working_directory: /go/src/github.com/rkshkmr800/hotspots
+    steps:
+      - checkout
+
+      # specify any bash command here prefixed with `run: `
       - run: go test ./...
   
   # build_and_push:
@@ -29,6 +40,9 @@ worlflows:
   "Continuous Integration And Deployment":
     jobs:
       - build
+      - test:
+          requires:
+            - build
       # - build_and_push:
       #     requires:
       #       - test
