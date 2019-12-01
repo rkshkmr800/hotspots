@@ -32,10 +32,10 @@ worlflows:
   continuous_integration_and_deployment:
     jobs:
       - build_and_test
-      - build_and_push:
-          requires:
-            - build_and_test
-          filers:
-            branches:
-              only: master
+      # - build_and_push:
+      #     requires:
+      #       - build_and_test
+      #     filers:
+      #       branches:
+      #         only: master
 
