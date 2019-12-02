@@ -21,7 +21,7 @@ jobs:
     machine: true
     steps:
       - checkout
-      - gcr/auth
+      - gcr/gcr-auth
       
 workflows:
   continuous_integration:
