@@ -1,10 +1,10 @@
 version: 2.1
-# orbs:
-#   gcp-gke: circleci/gcp-gke@0.1.0
-#   gcr: circleci/gcp-gcr@0.0.2
+orbs:
+  gcp-gke: circleci/gcp-gke@0.1.0
+  gcr: circleci/gcp-gcr@0.0.2
 
 jobs:
-  build_project:
+  build_and_test:
     docker:
       - image: circleci/golang:1.13
 
@@ -14,29 +14,22 @@ jobs:
 
       - run: go get -v -t -d ./...
       - run: go build ./...
+      - run: go test ./...
 
-  run_unit_tests:
-    description: Build and run the tests
-    docker:
-      - image: circleci/golang:1.13
-
-    working_directory: /go/src/github.com/rkshkmr800/hotspots
+  build_and_push:
+    description: Build the image and then push the container
+    machine: true
     steps:
       - checkout
-
-      - run: go get -v -t -d ./...
-      - run: go test ./...
+      - gcr/auth
       
 workflows:
   continuous_integration:
     jobs:
-      - build_project
-      - run_unit_tests:
+      - build_and_test
+      - build_and_push:
           requires:
-            - build_project
-      # - build_and_push:
-      #     requires:
-      #       - test
-      #     filers:
-      #       branches:
-      #         only: master
+            - build_and_test
+          filers:
+            branches:
+              only: master
