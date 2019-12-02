@@ -30,6 +30,6 @@ workflows:
       - build_and_push:
           requires:
             - build_and_test
-          filers:
+          filters:
             branches:
               only: master
