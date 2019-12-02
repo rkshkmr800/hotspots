@@ -17,7 +17,7 @@ jobs:
       - run: go test ./...
 
   build_and_push:
-    description: Build the image and then push the container
+    description: Build the image and then push the container to gcr
     machine: true
     steps:
       - checkout
