@@ -2,9 +2,9 @@ FROM golang:1.13
 
 LABEL Author="Rakesh kumar Chanderki"
 
-WORKDIR /app
+WORKDIR /backend/main-framework
 
-COPY /go/src/github.com/rkshkmr800/hotspots/backend/main-framework .
+ADD ./backend/main-framework .
 
 RUN go mod download
 
