@@ -23,8 +23,8 @@ jobs:
       - checkout
       - gcr/gcr-auth
       - gcr/build-image:
-          path: ./docker/
-          dockerfile: Backend.Dockerfile
+          # path: ./docker/
+          dockerfile: docker/Backend.Dockerfile
           image:  hotspots-backend-gke 
           tag:  v1
       - gcr/push-image:
