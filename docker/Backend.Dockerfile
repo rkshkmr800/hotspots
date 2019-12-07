@@ -4,11 +4,11 @@ LABEL Author="Rakesh kumar Chanderki"
 
 WORKDIR /app
 
-COPY --from=builder /go/src/github.com/rkshkmr800/hotspots/backend/main-framework .
+COPY /go/src/github.com/rkshkmr800/hotspots/backend/main-framework .
 
 RUN go mod download
 
-RUN go build -o hotspots
+RUN go build -o main-framework
 
 EXPOSE 8080
 
