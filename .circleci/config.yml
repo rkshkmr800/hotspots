@@ -22,17 +22,11 @@ jobs:
     steps:
       - checkout
       - gcr/gcr-auth
-      - gcr/build-image:
+      - gcr/build-and-push-image:
           dockerfile: Backend.Dockerfile
-          path: docker/
+          path: ./docker/
           image:  hotspots-backend-gke 
           tag:  v1
-      - gcr/push-image:
-          image:  hotspots-backend-gke
-          tag:  v1
-      - gcp-gke/install
-      - gcp-gke/init
-      
       
 workflows:
   continuous_integration:
