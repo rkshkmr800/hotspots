@@ -16,18 +16,18 @@ jobs:
       - run: go build ./...
       - run: go test ./...
 
-  build_and_push:
+  build_and_push_container:
     description: Build the image and then push the container to gcr
     machine: true
     steps:
       - checkout
       - gcr/gcr-auth
       - gcr/build-image:
-          image: 
-          tag:  
+          image:  hotspots-backend-gke 
+          tag:  v1
       - gcr/push-image:
-          image:
-          tag:
+          image:  hotspots-backend-gke
+          tag:  v1
       - gcp-gke/install
       - gcp-gke/init
       
@@ -36,7 +36,7 @@ workflows:
   continuous_integration:
     jobs:
       - build_and_test
-      - build_and_push:
+      - build_and_push_container:
           requires:
             - build_and_test
           filters:
