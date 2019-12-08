@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: hotspots
+  name: backend-hotspots-app
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: backend-hotspots-app
+  template:
+    metadata:
+      labels:
+        app: backend-hotspots-app
+    spec:
+      containers:
+        - name: hotspots-backend-container
+          image: gcr.io/kouzoh-p-r-chanderki/hotspots-backend-gke:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
