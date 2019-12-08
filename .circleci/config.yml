@@ -38,9 +38,8 @@ jobs:
         - gcp-gke/install
         - gcp-gke/init
         - gcp-gke/rollout-image:
-            cluster: hotspots
-            deployment: backend-deployment
-            container: hotspots-backend-container
+            deployment: hotspots
+            container: backend-hotspots-container
             image: gcr.io/kouzoh-p-r-chanderki/hotspots-backend-gke:v1
         
       
