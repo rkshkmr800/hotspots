@@ -6,7 +6,7 @@ metadata:
     app: hotspots
 spec:
   selector:
-    app: hotspots-backend-app
+    app: backend-hotspots-app
   ports:
     - port: 8080
       protocol: TCP

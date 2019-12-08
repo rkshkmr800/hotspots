@@ -5,5 +5,5 @@ import (
 )
 
 func hello(c *gin.Context) {
-	c.String(200, "Hello World")
+	c.String(200, "{msg:'Hello World'}")
 }
