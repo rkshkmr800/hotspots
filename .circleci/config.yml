@@ -57,7 +57,7 @@ workflows:
               only: master
       - deploy_backend_container:
           requires:
-            - build_and_push_container_backend
+            - build_and_push_backend_container
           filters:
             branches:
               only: master
