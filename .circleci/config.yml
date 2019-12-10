@@ -11,7 +11,6 @@ jobs:
     working_directory: /go/src/github.com/rkshkmr800/hotspots
     steps:
       - checkout
-      - run: ls -l
       - run: go get -v -t -d ./...
       - run: go build ./...
       - run: go test ./...
@@ -44,6 +43,42 @@ jobs:
         - run:
             command: kubectl rollout restart deployment/backend-hotspots-app
 
+  build_and_test_backend_ml:
+    docker:
+      - image: circleci/python:3.7.5
+
+    steps:
+      - checkout
+      - run: python backend/ml-framework/app.py
+
+  build_and_push_backend_ml_container:
+    description: Build the ML image and then push the container to gcr
+    machine: true
+    steps:
+      - checkout
+      - gcr/gcr-auth
+      - gcr/build-image:
+          dockerfile: docker/Backend.ml.Dockerfile
+          image:  hotspots-backend-ml-gke 
+          tag:  v1
+      - gcr/push-image:
+          image:  hotspots-backend-ml-gke
+          tag:  v1
+    
+  deploy_backend_ml_container:
+      description: Deploy the backend container to GCP
+      machine: true
+      steps:
+        - gcp-gke/install
+        - gcp-gke/init
+        - gcp-gke/rollout-image:
+            cluster: hotspots
+            deployment: backend-ml-hotspots-app
+            container: hotspots-backend-ml-container
+            image: gcr.io/kouzoh-p-r-chanderki/hotspots-backend-ml-gke:v1
+        - run:
+            command: kubectl rollout restart deployment/backend-ml-hotspots-app
+
         
 workflows:
   cicd_backend:
@@ -58,6 +93,21 @@ workflows:
       - deploy_backend_container:
           requires:
             - build_and_push_backend_container
+          filters:
+            branches:
+              only: master
+  cicd_ml_backend:
+    jobs:
+      - build_and_test_backend_ml
+      - build_and_push_backend_ml_container:
+          requires:
+            - build_and_test_backend_ml
+          filters:
+            branches:
+              only: master
+      - deploy_backend_ml_container:
+          requires:
+            - build_and_push_backend_ml_container
           filters:
             branches:
               only: master
