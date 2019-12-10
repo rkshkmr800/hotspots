@@ -11,7 +11,7 @@ jobs:
     working_directory: /go/src/github.com/rkshkmr800/hotspots
     steps:
       - checkout
-
+      - run: ls -l
       - run: go get -v -t -d ./...
       - run: go build ./...
       - run: go test ./...
@@ -23,7 +23,6 @@ jobs:
       - checkout
       - gcr/gcr-auth
       - gcr/build-image:
-          # path: ./docker/
           dockerfile: docker/Backend.Dockerfile
           image:  hotspots-backend-gke 
           tag:  v1
@@ -44,6 +43,7 @@ jobs:
             image: gcr.io/kouzoh-p-r-chanderki/hotspots-backend-gke:v1
         - run:
             command: kubectl rollout restart deployment/backend-hotspots-app
+
         
 workflows:
   cicd_backend:
