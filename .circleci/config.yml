@@ -49,8 +49,8 @@ jobs:
 
     steps:
       - checkout
-      - run: pip install -r backend/ml-framework/requirements.txt --user
-      - run: python backend/ml-framework/app.py
+      - run: pip3 install -r backend/ml-framework/requirements.txt --user
+      - run: pytest
 
   build_and_push_backend_ml_container:
     description: Build the ML image and then push the container to gcr
