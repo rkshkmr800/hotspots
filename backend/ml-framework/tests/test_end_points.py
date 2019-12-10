@@ -5,3 +5,6 @@ def client():
     from web import app
     app.app.config['TESTING'] = True
     return app.app.test_client()
+
+def test_hello_world():
+    pass
