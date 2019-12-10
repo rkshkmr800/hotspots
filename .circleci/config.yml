@@ -49,7 +49,7 @@ jobs:
 
     steps:
       - checkout
-      - run: pip install -r backend/ml-framework/requirements.txt
+      - run: pip install -r backend/ml-framework/requirements.txt --user
       - run: python backend/ml-framework/app.py
 
   build_and_push_backend_ml_container:

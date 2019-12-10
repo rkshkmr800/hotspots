@@ -12,7 +12,7 @@ WORKDIR /backend/ml-framework
 
 COPY ./backend/ml-framework . 
 
-RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt --user
 
 ENTRYPOINT [ "python" ]
 
