@@ -4,7 +4,7 @@ orbs:
   gcr: circleci/gcp-gcr@0.6.1
 
 jobs:
-  build_and_test:
+  build_and_test_backend:
     docker:
       - image: circleci/golang:1.13
 
@@ -16,7 +16,7 @@ jobs:
       - run: go build ./...
       - run: go test ./...
 
-  build_and_push_container:
+  build_and_push_backend_container:
     description: Build the image and then push the container to gcr
     machine: true
     steps:
@@ -31,7 +31,7 @@ jobs:
           image:  hotspots-backend-gke
           tag:  v1
     
-  deploy_container:
+  deploy_backend_container:
       description: Deploy the backend container to GCP
       machine: true
       steps:
@@ -46,18 +46,18 @@ jobs:
             command: kubectl rollout restart deployment/backend-hotspots-app
         
 workflows:
-  continuous_integration:
+  cicd_backend:
     jobs:
-      - build_and_test
-      - build_and_push_container:
+      - build_and_test_backend
+      - build_and_push_backend_container:
           requires:
-            - build_and_test
+            - build_and_test_backend
           filters:
             branches:
               only: master
-      - deploy_container:
+      - deploy_backend_container:
           requires:
-            - build_and_push_container
+            - build_and_push_container_backend
           filters:
             branches:
               only: master
