@@ -2,3 +2,4 @@ hotspots
 
 hotspots
 *.json
+*.DS_Store
